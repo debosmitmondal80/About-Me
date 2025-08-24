@@ -1,4 +1,21 @@
-// Portfolio Website JavaScript - Simplified and reliable version
+// Portfolio Website JavaScript - Simplified and reliable version////////////////////NEW CHANGE
+// Force scroll to top on page load/reload
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
+});
+
+// Disable browser scroll restoration
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     
     // Get navigation elements

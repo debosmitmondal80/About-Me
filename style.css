@@ -1243,3 +1243,18 @@ html {
     padding: var(--space-16);
   }
 }
+
+/* === SIMPLE MOBILE FIX === */
+@media screen and (max-width: 768px) {
+    /* Just fix the visited state, don't touch anything else */
+    .btn-secondary:visited {
+        color: white !important;
+    }
+    
+
+    
+    /* Remove tap highlight */
+    .btn {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
