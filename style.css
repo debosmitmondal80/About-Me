@@ -1245,16 +1245,55 @@ html {
 }
 
 /* === SIMPLE MOBILE FIX === */
+/* === ENHANCED MOBILE FIX === */
 @media screen and (max-width: 768px) {
-    /* Just fix the visited state, don't touch anything else */
-    .btn-secondary:visited {
-        color: white !important;
+    /* Fix the visited state for different button types */
+    .btn--secondary:visited {
+        color: var(--color-text) !important;
     }
     
-
+    .btn--primary:visited {
+        color: var(--color-btn-primary-text) !important;
+    }
+    
+    .btn--outline:visited {
+        color: var(--color-text) !important;
+    }
+    
+    .project-links a.btn:visited {
+        color: var(--color-text) !important;
+    }
+    
+    .social-links a:visited i {
+        color: var(--color-text-secondary) !important;
+    }
     
     /* Remove tap highlight */
     .btn {
         -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* FIX FOR STICKY ACTIVE STATE ON MOBILE */
+@media (hover: none) and (pointer: coarse) {
+    /* Prevent sticky :active state on ALL button types */
+    .btn:active,
+    .btn--primary:active,
+    .btn--secondary:active,
+    .btn--outline:active,
+    a.btn:active {
+        transform: none !important;
+        box-shadow: none !important;
+        background: var(--color-secondary) !important;
+    }
+    
+    /* Specific fix for secondary buttons */
+    .btn--secondary:active {
+        background: var(--color-secondary-hover) !important;
+    }
+    
+    /* Specific fix for primary buttons */
+    .btn--primary:active {
+        background: var(--color-primary-active) !important;
     }
 }
