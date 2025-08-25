@@ -1245,6 +1245,75 @@ html {
         box-shadow: none !important;
     }
 }
+/*
+==================================================================
+== FINAL & COMPLETE MOBILE / TOUCHSCREEN FIXES — v2
+==================================================================
+Replace earlier mobile-fix snippets with this block.
+*/
+
+/* PART 1: Visited link color fix (unchanged) */
+@media screen and (max-width: 768px) {
+  .btn--primary:visited {
+    color: var(--color-btn-primary-text) !important;
+  }
+  .btn--secondary:visited,
+  .btn--outline:visited,
+  .project-links a.btn:visited {
+    color: var(--color-text) !important;
+  }
+  .social-links a:visited i {
+    color: var(--color-text-secondary) !important;
+  }
+}
+
+/* PART 2: Disable hover-only effects on touch (unchanged) */
+@media (hover: none) and (pointer: coarse) {
+  /* Buttons shouldn’t change on :hover on touch */
+  .btn--primary:hover { background: var(--color-primary); }
+  .btn--secondary:hover { background: var(--color-secondary); }
+  .btn--outline:hover { background: transparent; }
+
+  /* Cards and social links shouldn’t “hover-animate” on touch */
+  .project-card:hover { transform: none; box-shadow: var(--shadow-sm); }
+  .social-link:hover { transform: none; box-shadow: var(--shadow-md); color: var(--color-text); }
+}
+
+/* PART 2B: Unstick :active and focus styles on touch (new) */
+@media (hover: none) and (pointer: coarse) {
+  /* Neutralize pressed visuals that can linger after tap */
+  .btn:active { transform: none !important; box-shadow: none !important; }
+
+  /* Key fix for “Get in touch” (often an outline-styled anchor button) */
+  .btn--outline:active,
+  .btn--outline:focus,
+  .btn--outline:focus-visible {
+    background: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Prevent lingering focus ring on touch while preserving desktop keyboard focus */
+  .btn:focus,
+  .btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Improve touch behavior and reduce press quirks */
+  a.btn {
+    touch-action: manipulation;          /* Hint to handle taps as clicks */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* PART 3: Universal tap highlight removal (unchanged) */
+.btn, .social-link, .nav-link, .tag, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
 
 /* Print styles */
 @media print {
@@ -1263,76 +1332,3 @@ html {
 }
 
 
-/*
-==================================================================
-== FINAL & COMPLETE MOBILE / TOUCHSCREEN FIXES
-==================================================================
-This block consolidates all necessary fixes for a smooth experience on
-mobile and touch devices. It should replace all previous mobile-fix snippets.
-*/
-
-/*
- * PART 1: VISITED LINK COLOR FIX
- * Prevents links styled as buttons from turning purple after being tapped.
- * This is scoped to screen width as it's a general mobile layout issue.
-*/
-@media screen and (max-width: 768px) {
-    /* Fix for primary buttons */
-    .btn--primary:visited {
-        color: var(--color-btn-primary-text) !important;
-    }
-
-    /* Fix for secondary, outline, and project link buttons */
-    .btn--secondary:visited,
-    .btn--outline:visited,
-    .project-links a.btn:visited {
-        color: var(--color-text) !important;
-    }
-
-    /* Fix for social media icons */
-    .social-links a:visited i {
-        color: var(--color-text-secondary) !important;
-    }
-}
-
-/*
- * PART 2: "STICKY HOVER" & "STUCK ACTIVE STATE" FIX
- * This media query specifically targets touchscreens that do not have hover capabilities.
- * It solves the "stuck button" issue by disabling hover effects that get
- * incorrectly triggered and stuck on tap. The :active state (the actual tap color
- * change) will still work correctly, but it won't persist after you lift your finger.
-*/
-@media (hover: none) and (pointer: coarse) {
-    /* Disable hover background change on main buttons */
-    .btn--primary:hover {
-        background: var(--color-primary);
-    }
-    .btn--secondary:hover {
-        background: var(--color-secondary);
-    }
-    .btn--outline:hover {
-        background: transparent;
-    }
-
-    /* Disable hover transform/shadow on project cards */
-    .project-card:hover {
-        transform: none;
-        box-shadow: var(--shadow-sm); /* Revert to default shadow */
-    }
-
-    /* Disable hover transform/shadow on social links */
-    .social-link:hover {
-        transform: none;
-        box-shadow: var(--shadow-md);
-        color: var(--color-text);
-    }
-}
-
-/*
- * PART 3: UNIVERSAL TAP HIGHLIGHT REMOVAL
- * Removes the default blue/gray highlight overlay when tapping any interactive element
- * on WebKit-based mobile browsers (like Safari and Chrome on iOS/Android).
-*/
-.btn, .social-link, .nav-link, .tag, a {
-    -webkit-tap-highlight-color: transparent;
-}
