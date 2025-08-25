@@ -1,4 +1,4 @@
-# debosmittech
+# debosmittech - A responsive portfolio website. 
 **Portfolio Website**
 A clean, responsive portfolio built with vanilla HTML/CSS featuring a comprehensive design system with dark/light theming.
 
